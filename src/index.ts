@@ -18,23 +18,25 @@ let res = 0;
 let runs = C;
 
 while(runs > 0){
-    let people = [];
+    let people: number[] = [];
     let peopleSum = 0;
+    let tmp: number[] = []
 
     while(peopleSum < L){
         let group = queue[0];
+
 
         if(group+peopleSum <= L) {
             queue.shift();
             people.push(group);
             peopleSum += group;
-            queue.push(group);
+            tmp.push(group);
         }
         else break;
     }
 
-    res += people.reduce((total: number, curr: number) => total+=curr, 0);
-
+    res += people.reduce((total: number, curr: number) => total+=curr, 0)
+    queue = queue.concat(tmp);
     runs--;
 }
 
